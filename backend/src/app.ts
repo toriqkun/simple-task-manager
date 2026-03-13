@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import userRoutes from './routes/userRoutes';
+import taskRoutes from './routes/taskRoutes';
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/users', userRoutes);
+app.use('/tasks', taskRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.json({ message: 'Welcome to Task Manager API' });
