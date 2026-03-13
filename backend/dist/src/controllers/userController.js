@@ -22,6 +22,15 @@ class UserController {
             res.status(400).json({ message: error.message });
         }
     }
+    async login(req, res) {
+        try {
+            const result = await userService_1.default.login(req.body);
+            res.json(result);
+        }
+        catch (error) {
+            res.status(401).json({ message: error.message });
+        }
+    }
     async getAll(req, res) {
         try {
             const users = await userService_1.default.getAllUsers();

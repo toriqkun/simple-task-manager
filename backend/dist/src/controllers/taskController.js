@@ -8,14 +8,12 @@ const taskService_1 = __importDefault(require("../services/taskService"));
 class TaskController {
     async create(req, res) {
         try {
-            // Note: userId will eventually come from auth middleware
-            // For now, we expect it in the body for testing purposes in Step 4
-            const { userId, ...taskData } = req.body;
+            const userId = req.user?.id;
             if (!userId) {
-                res.status(400).json({ message: 'userId is required' });
+                res.status(401).json({ message: 'Unauthorized' });
                 return;
             }
-            const task = await taskService_1.default.createTask(Number(userId), taskData);
+            const task = await taskService_1.default.createTask(userId, req.body);
             res.status(201).json(task);
         }
         catch (error) {
@@ -33,7 +31,12 @@ class TaskController {
     }
     async getByUserId(req, res) {
         try {
-            const tasks = await taskService_1.default.getTasksByUserId(Number(req.params.userId));
+            const userId = req.user?.id;
+            if (!userId) {
+                res.status(401).json({ message: 'Unauthorized' });
+                return;
+            }
+            const tasks = await taskService_1.default.getTasksByUserId(userId);
             res.json(tasks);
         }
         catch (error) {

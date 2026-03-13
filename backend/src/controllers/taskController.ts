@@ -1,18 +1,17 @@
 import { Request, Response } from 'express';
 import taskService from '../services/taskService';
+import { AuthRequest } from '../middleware/authMiddleware';
 
 export class TaskController {
-  async create(req: Request, res: Response): Promise<void> {
+  async create(req: AuthRequest, res: Response): Promise<void> {
     try {
-      // Note: userId will eventually come from auth middleware
-      // For now, we expect it in the body for testing purposes in Step 4
-      const { userId, ...taskData } = req.body;
+      const userId = req.user?.id;
       if (!userId) {
-        res.status(400).json({ message: 'userId is required' });
+        res.status(401).json({ message: 'Unauthorized' });
         return;
       }
 
-      const task = await taskService.createTask(Number(userId), taskData);
+      const task = await taskService.createTask(userId, req.body);
       res.status(201).json(task);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -28,9 +27,14 @@ export class TaskController {
     }
   }
 
-  async getByUserId(req: Request, res: Response): Promise<void> {
+  async getByUserId(req: AuthRequest, res: Response): Promise<void> {
     try {
-      const tasks = await taskService.getTasksByUserId(Number(req.params.userId));
+      const userId = req.user?.id;
+      if (!userId) {
+        res.status(401).json({ message: 'Unauthorized' });
+        return;
+      }
+      const tasks = await taskService.getTasksByUserId(userId);
       res.json(tasks);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
