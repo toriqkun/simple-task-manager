@@ -20,11 +20,24 @@ export class UserController {
 
   async login(req: Request, res: Response): Promise<void> {
     try {
-      const result = await userService.login(req.body);
-      res.json(result);
+      const { token, user } = await userService.login(req.body);
+      
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+      });
+
+      res.json({ user });
     } catch (error: any) {
       res.status(401).json({ message: error.message });
     }
+  }
+
+  async logout(req: Request, res: Response): Promise<void> {
+    res.clearCookie('token');
+    res.json({ message: 'Logged out successfully' });
   }
 
   async getAll(req: Request, res: Response): Promise<void> {

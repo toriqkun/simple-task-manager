@@ -5,6 +5,7 @@ const router = Router();
 
 router.post('/', userController.register);
 router.post('/login', userController.login);
+router.post('/logout', userController.logout);
 router.get('/', userController.getAll);
 router.get('/:id', userController.getById);
 router.get('/:id/tasks', userController.getUserTasks);
