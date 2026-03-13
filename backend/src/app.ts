@@ -3,10 +3,10 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
+dotenv.config();
+
 import userRoutes from './routes/userRoutes';
 import taskRoutes from './routes/taskRoutes';
-
-dotenv.config();
 
 const app: Application = express();
 

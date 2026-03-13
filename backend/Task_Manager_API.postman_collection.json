@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "8d3e9c4b-4f7a-4b9d-a8e1-5c8f93e2b1d0",
-		"name": "Task Manager API (Cookie Auth)",
+		"name": "Task Manager API",
 		"description": "Collection for testing Task Manager API endpoints with Cookie-based Authentication",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
