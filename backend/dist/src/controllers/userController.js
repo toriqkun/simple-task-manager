@@ -87,6 +87,15 @@ class UserController {
             res.status(400).json({ message: error.message });
         }
     }
+    async getUserTasks(req, res) {
+        try {
+            const tasks = await userService_1.default.getTasksByUserId(Number(req.params.id));
+            res.json(tasks);
+        }
+        catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
 }
 exports.UserController = UserController;
 exports.default = new UserController();

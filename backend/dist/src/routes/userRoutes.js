@@ -10,6 +10,7 @@ router.post('/', userController_1.default.register);
 router.post('/login', userController_1.default.login);
 router.get('/', userController_1.default.getAll);
 router.get('/:id', userController_1.default.getById);
+router.get('/:id/tasks', userController_1.default.getUserTasks);
 router.put('/:id', userController_1.default.update);
 router.delete('/:id', userController_1.default.delete);
 exports.default = router;

@@ -10,7 +10,11 @@ const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const taskRoutes_1 = __importDefault(require("./routes/taskRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
 app.use(express_1.default.json());
 app.use('/users', userRoutes_1.default);
 app.use('/tasks', taskRoutes_1.default);

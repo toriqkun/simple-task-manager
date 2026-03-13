@@ -60,6 +60,9 @@ class UserService {
     async deleteUser(id) {
         return userRepository_1.default.delete(id);
     }
+    async getTasksByUserId(userId) {
+        return userRepository_1.default.findTasksByUserId(userId);
+    }
 }
 exports.UserService = UserService;
 exports.default = new UserService();

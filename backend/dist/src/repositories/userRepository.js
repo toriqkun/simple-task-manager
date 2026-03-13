@@ -35,6 +35,13 @@ class UserRepository {
             where: { id },
         });
     }
+    async findTasksByUserId(userId) {
+        return prisma_1.default.task.findMany({
+            where: {
+                userId: userId,
+            },
+        });
+    }
 }
 exports.UserRepository = UserRepository;
 exports.default = new UserRepository();

@@ -7,6 +7,7 @@ router.post('/', userController.register);
 router.post('/login', userController.login);
 router.get('/', userController.getAll);
 router.get('/:id', userController.getById);
+router.get('/:id/tasks', userController.getUserTasks);
 router.put('/:id', userController.update);
 router.delete('/:id', userController.delete);
 

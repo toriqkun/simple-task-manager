@@ -1,6 +1,7 @@
 import userRepository from '../repositories/userRepository';
 import { CreateUserDTO, LoginDTO } from '../dto/user';
 import { User } from '../types/user';
+import { Task } from '../types/task';
 import { PasswordUtils } from '../utils/password';
 import { JWTUtils } from '../utils/jwt';
 
@@ -67,6 +68,10 @@ export class UserService {
 
   async deleteUser(id: number): Promise<User> {
     return userRepository.delete(id);
+  }
+
+  async getTasksByUserId(userId: number): Promise<Task[]> {
+    return userRepository.findTasksByUserId(userId);
   }
 }
 

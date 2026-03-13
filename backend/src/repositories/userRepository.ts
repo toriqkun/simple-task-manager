@@ -1,5 +1,6 @@
 import prisma from '../config/prisma';
 import { User } from '../types/user';
+import { Task } from '../types/task';
 import { CreateUserDTO } from '../dto/user';
 
 export class UserRepository {
@@ -35,6 +36,14 @@ export class UserRepository {
   async delete(id: number): Promise<User> {
     return prisma.user.delete({
       where: { id },
+    });
+  }
+
+  async findTasksByUserId(userId: number): Promise<Task[]> {
+    return prisma.task.findMany({
+      where: {
+        userId: userId,
+      },
     });
   }
 }
