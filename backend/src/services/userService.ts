@@ -1,6 +1,6 @@
-import userRepository from '../repositories/user.repository';
-import { CreateUserDTO } from '../dto/user.dto';
-import { User } from '../types/user.types';
+import userRepository from '../repositories/userRepository';
+import { CreateUserDTO } from '../dto/user';
+import { User } from '../types/user';
 import { PasswordUtils } from '../utils/password';
 
 export class UserService {

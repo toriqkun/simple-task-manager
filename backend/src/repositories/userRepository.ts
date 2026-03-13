@@ -1,6 +1,6 @@
 import prisma from '../config/prisma';
-import { User } from '../types/user.types';
-import { CreateUserDTO } from '../dto/user.dto';
+import { User } from '../types/user';
+import { CreateUserDTO } from '../dto/user';
 
 export class UserRepository {
   async create(data: CreateUserDTO): Promise<User> {
