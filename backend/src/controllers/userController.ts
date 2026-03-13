@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import userService from '../services/userService';
+import { AuthRequest } from '../middleware/authMiddleware';
 
 export class UserController {
   async register(req: Request, res: Response): Promise<void> {
@@ -71,9 +72,17 @@ export class UserController {
     }
   }
 
-  async update(req: Request, res: Response): Promise<void> {
+  async update(req: AuthRequest, res: Response): Promise<void> {
     try {
-      const user = await userService.updateUser(Number(req.params.id), req.body);
+      const targetId = Number(req.params.id);
+      const currentUserId = req.user?.id;
+
+      if (targetId !== currentUserId) {
+        res.status(403).json({ message: 'You can only update your own profile' });
+        return;
+      }
+
+      const user = await userService.updateUser(targetId, req.body);
       res.json({
         message: 'User updated successfully',
         user: {
@@ -87,9 +96,18 @@ export class UserController {
     }
   }
 
-  async delete(req: Request, res: Response): Promise<void> {
+  async delete(req: AuthRequest, res: Response): Promise<void> {
     try {
-      await userService.deleteUser(Number(req.params.id));
+      const targetId = Number(req.params.id);
+      const currentUserId = req.user?.id;
+
+      if (targetId !== currentUserId) {
+        res.status(403).json({ message: 'You can only delete your own account' });
+        return;
+      }
+
+      await userService.deleteUser(targetId);
+      res.clearCookie('token');
       res.json({ message: 'User deleted successfully' });
     } catch (error: any) {
       res.status(400).json({ message: error.message });

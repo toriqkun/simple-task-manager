@@ -22,17 +22,23 @@ class TaskService {
         }
         return task;
     }
-    async updateTask(id, data) {
+    async updateTask(id, userId, data) {
         const task = await taskRepository_1.default.findById(id);
         if (!task) {
             throw new Error('Task not found');
         }
+        if (task.userId !== userId) {
+            throw new Error('You do not have permission to update this task');
+        }
         return taskRepository_1.default.update(id, data);
     }
-    async deleteTask(id) {
+    async deleteTask(id, userId) {
         const task = await taskRepository_1.default.findById(id);
         if (!task) {
             throw new Error('Task not found');
+        }
+        if (task.userId !== userId) {
+            throw new Error('You do not have permission to delete this task');
         }
         return taskRepository_1.default.delete(id);
     }

@@ -54,7 +54,12 @@ class TaskController {
     }
     async update(req, res) {
         try {
-            const task = await taskService_1.default.updateTask(Number(req.params.id), req.body);
+            const userId = req.user?.id;
+            if (!userId) {
+                res.status(401).json({ message: 'Unauthorized' });
+                return;
+            }
+            const task = await taskService_1.default.updateTask(Number(req.params.id), userId, req.body);
             res.json(task);
         }
         catch (error) {
@@ -63,7 +68,12 @@ class TaskController {
     }
     async delete(req, res) {
         try {
-            await taskService_1.default.deleteTask(Number(req.params.id));
+            const userId = req.user?.id;
+            if (!userId) {
+                res.status(401).json({ message: 'Unauthorized' });
+                return;
+            }
+            await taskService_1.default.deleteTask(Number(req.params.id), userId);
             res.json({ message: 'Task deleted successfully' });
         }
         catch (error) {

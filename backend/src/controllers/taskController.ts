@@ -50,18 +50,28 @@ export class TaskController {
     }
   }
 
-  async update(req: Request, res: Response): Promise<void> {
+  async update(req: AuthRequest, res: Response): Promise<void> {
     try {
-      const task = await taskService.updateTask(Number(req.params.id), req.body);
+      const userId = req.user?.id;
+      if (!userId) {
+        res.status(401).json({ message: 'Unauthorized' });
+        return;
+      }
+      const task = await taskService.updateTask(Number(req.params.id), userId, req.body);
       res.json(task);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }
   }
 
-  async delete(req: Request, res: Response): Promise<void> {
+  async delete(req: AuthRequest, res: Response): Promise<void> {
     try {
-      await taskService.deleteTask(Number(req.params.id));
+      const userId = req.user?.id;
+      if (!userId) {
+        res.status(401).json({ message: 'Unauthorized' });
+        return;
+      }
+      await taskService.deleteTask(Number(req.params.id), userId);
       res.json({ message: 'Task deleted successfully' });
     } catch (error: any) {
       res.status(400).json({ message: error.message });

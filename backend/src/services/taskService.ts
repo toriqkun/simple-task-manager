@@ -23,18 +23,24 @@ export class TaskService {
     return task;
   }
 
-  async updateTask(id: number, data: Partial<CreateTaskDTO>): Promise<Task> {
+  async updateTask(id: number, userId: number, data: Partial<CreateTaskDTO>): Promise<Task> {
     const task = await taskRepository.findById(id);
     if (!task) {
       throw new Error('Task not found');
     }
+    if (task.userId !== userId) {
+      throw new Error('You do not have permission to update this task');
+    }
     return taskRepository.update(id, data);
   }
 
-  async deleteTask(id: number): Promise<Task> {
+  async deleteTask(id: number, userId: number): Promise<Task> {
     const task = await taskRepository.findById(id);
     if (!task) {
       throw new Error('Task not found');
+    }
+    if (task.userId !== userId) {
+      throw new Error('You do not have permission to delete this task');
     }
     return taskRepository.delete(id);
   }

@@ -74,7 +74,13 @@ class UserController {
     }
     async update(req, res) {
         try {
-            const user = await userService_1.default.updateUser(Number(req.params.id), req.body);
+            const targetId = Number(req.params.id);
+            const currentUserId = req.user?.id;
+            if (targetId !== currentUserId) {
+                res.status(403).json({ message: 'You can only update your own profile' });
+                return;
+            }
+            const user = await userService_1.default.updateUser(targetId, req.body);
             res.json({
                 message: 'User updated successfully',
                 user: {
@@ -90,7 +96,14 @@ class UserController {
     }
     async delete(req, res) {
         try {
-            await userService_1.default.deleteUser(Number(req.params.id));
+            const targetId = Number(req.params.id);
+            const currentUserId = req.user?.id;
+            if (targetId !== currentUserId) {
+                res.status(403).json({ message: 'You can only delete your own account' });
+                return;
+            }
+            await userService_1.default.deleteUser(targetId);
+            res.clearCookie('token');
             res.json({ message: 'User deleted successfully' });
         }
         catch (error) {
