@@ -29,8 +29,8 @@ class UserController {
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict',
-                maxAge: 24 * 60 * 60 * 1000, // 1 day
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+                maxAge: 24 * 60 * 60 * 1000,
             });
             res.json({ user });
         }
@@ -39,7 +39,11 @@ class UserController {
         }
     }
     async logout(req, res) {
-        res.clearCookie('token');
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        });
         res.json({ message: 'Logged out successfully' });
     }
     async getAll(req, res) {
@@ -104,7 +108,11 @@ class UserController {
                 return;
             }
             await userService_1.default.deleteUser(targetId);
-            res.clearCookie('token');
+            res.clearCookie('token', {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            });
             res.json({ message: 'User deleted successfully' });
         }
         catch (error) {
