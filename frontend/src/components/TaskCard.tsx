@@ -19,6 +19,7 @@ export default function TaskCard({ task, onUpdate, onEdit }: TaskCardProps) {
       onUpdate();
     } catch (error) {
       console.error('Failed to toggle completion', error);
+    } finally {
       setLoading(false);
     }
   };
@@ -32,6 +33,7 @@ export default function TaskCard({ task, onUpdate, onEdit }: TaskCardProps) {
       onUpdate();
     } catch (error) {
       console.error('Failed to delete task', error);
+    } finally {
       setLoading(false);
     }
   };
@@ -98,6 +100,7 @@ export default function TaskCard({ task, onUpdate, onEdit }: TaskCardProps) {
   return (
     <div className={`group relative bg-slate-900 border border-slate-800 rounded-xl p-4 sm:flex items-center transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-indigo-500/5 hover:border-slate-700
       ${task.completed ? 'opacity-70 bg-slate-900/50' : ''}
+      ${showMenu ? 'z-20' : 'z-10'}
     `}>
       <div className="flex items-center mb-3 sm:mb-0 sm:mr-4 text-slate-600 sm:text-slate-700 group-hover:text-slate-500 transition-colors">
         <GripVertical size={20} className="cursor-grab hidden sm:block mr-2" />
@@ -157,9 +160,9 @@ export default function TaskCard({ task, onUpdate, onEdit }: TaskCardProps) {
           </button>
 
           {showMenu && (
-            <div className="absolute right-0 mt-1 w-32 bg-slate-800 border border-slate-700 rounded-lg shadow-xl py-1 z-10 animate-in fade-in duration-200">
+            <div className="absolute right-0 mt-1 w-32 bg-slate-800 border border-slate-700 rounded-lg shadow-xl py-1 z-50 animate-in fade-in duration-200">
               <button
-                onClick={(e) => {
+                onMouseDown={(e) => {
                   e.stopPropagation();
                   onEdit(task);
                   setShowMenu(false);
@@ -171,7 +174,7 @@ export default function TaskCard({ task, onUpdate, onEdit }: TaskCardProps) {
                 <span>Edit</span>
               </button>
               <button
-                onClick={(e) => {
+                onMouseDown={(e) => {
                   e.stopPropagation();
                   handleDelete();
                   setShowMenu(false);
