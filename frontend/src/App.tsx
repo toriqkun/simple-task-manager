@@ -5,8 +5,7 @@ import { AuthProvider, useAuth } from './context/authContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
-// Placeholder components for pages
-const Dashboard = () => <div className="p-10 text-white">Dashboard Page (Pending Step 9)</div>;
+import Dashboard from './pages/Dashboard';
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const { isAuthenticated } = useAuth();

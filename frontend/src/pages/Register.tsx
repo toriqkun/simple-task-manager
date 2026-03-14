@@ -29,9 +29,7 @@ export default function Register() {
 
   return (
     <div className="flex min-h-screen bg-slate-950">
-      {/* Left Panel - Branding */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-slate-900 border-r border-slate-800">
-        {/* Background decorations */}
         <div className="absolute top-[-10%] right-[-10%] w-96 h-96 rounded-full bg-indigo-600/20 blur-3xl mix-blend-overlay"></div>
         <div className="absolute bottom-[-10%] left-[-10%] w-96 h-96 rounded-full bg-blue-600/20 blur-3xl mix-blend-overlay"></div>
         
@@ -45,7 +43,7 @@ export default function Register() {
           
           <h1 className="text-4xl xl:text-5xl font-bold text-white mb-6 leading-tight">
             Start organizing your <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-500">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 to-blue-500">
               life today.
             </span>
           </h1>
@@ -56,13 +54,13 @@ export default function Register() {
 
           <div className="space-y-6">
             <div className="flex items-center space-x-4">
-              <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 text-slate-300">
+              <div className="shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 text-slate-300">
                 <LayoutDashboard size={20} />
               </div>
               <p className="text-slate-300 font-medium">Intuitive dashboard tracking</p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 text-slate-300">
+              <div className="shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 text-slate-300">
                 <Sparkles size={20} />
               </div>
               <p className="text-slate-300 font-medium">Seamless real-time synchronization</p>
@@ -71,10 +69,9 @@ export default function Register() {
         </div>
       </div>
 
-      {/* Right Panel - Register Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 relative">
         <div className="w-full max-w-md mx-auto">
-          {/* Mobile Header */}
+
           <div className="lg:hidden mb-10 flex items-center justify-center space-x-3">
             <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400">
               <CheckSquare size={24} />
@@ -89,7 +86,7 @@ export default function Register() {
           
           {error && (
             <div className="mb-6 rounded-lg bg-red-500/10 p-4 text-red-500 border border-red-500/20 text-sm flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
               </svg>
               {error}
@@ -106,7 +103,7 @@ export default function Register() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full rounded-xl border border-slate-700/50 bg-slate-900/50 px-4 py-3 text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all shadow-sm placeholder-slate-500"
-                placeholder="John Doe"
+                placeholder="Enter your name"
               />
             </div>
 
@@ -119,7 +116,7 @@ export default function Register() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full rounded-xl border border-slate-700/50 bg-slate-900/50 px-4 py-3 text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all shadow-sm placeholder-slate-500"
-                placeholder="name@example.com"
+                placeholder="Enter your email"
               />
             </div>
 
@@ -132,14 +129,14 @@ export default function Register() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full rounded-xl border border-slate-700/50 bg-slate-900/50 px-4 py-3 text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all shadow-sm placeholder-slate-500"
-                placeholder="Create a password (min. 6 characters)"
+                placeholder="Enter your password"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 px-4 py-3 text-white font-medium hover:from-indigo-500 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-950 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-indigo-500/25 mt-8"
+              className="w-full rounded-xl bg-linear-to-r from-indigo-600 to-blue-600 px-4 py-3 text-white font-medium hover:from-indigo-500 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-950 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-indigo-500/25 mt-5 cursor-pointer"
             >
               {loading ? (
                  <div className="flex items-center justify-center">

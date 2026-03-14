@@ -31,9 +31,7 @@ export default function Login() {
 
   return (
     <div className="flex min-h-screen bg-slate-950">
-      {/* Left Panel - Branding */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-slate-900 border-r border-slate-800">
-        {/* Background decorations */}
         <div className="absolute top-[-10%] left-[-10%] w-96 h-96 rounded-full bg-blue-600/20 blur-3xl mix-blend-overlay"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 rounded-full bg-purple-600/20 blur-3xl mix-blend-overlay"></div>
         
@@ -47,7 +45,7 @@ export default function Login() {
           
           <h1 className="text-4xl xl:text-5xl font-bold text-white mb-6 leading-tight">
             Manage your daily <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-500">
               workflow elegantly.
             </span>
           </h1>
@@ -58,13 +56,13 @@ export default function Login() {
 
           <div className="space-y-6">
             <div className="flex items-center space-x-4">
-              <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 text-slate-300">
+              <div className="shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 text-slate-300">
                 <LayoutDashboard size={20} />
               </div>
               <p className="text-slate-300 font-medium">Intuitive dashboard tracking</p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 text-slate-300">
+              <div className="shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 text-slate-300">
                 <Sparkles size={20} />
               </div>
               <p className="text-slate-300 font-medium">Seamless real-time synchronization</p>
@@ -73,10 +71,8 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Right Panel - Login Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 relative">
         <div className="w-full max-w-md mx-auto">
-          {/* Mobile Header (Only visible on small screens) */}
           <div className="lg:hidden mb-10 flex items-center justify-center space-x-3">
             <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400">
               <CheckSquare size={24} />
@@ -91,7 +87,7 @@ export default function Login() {
           
           {error && (
             <div className="mb-6 rounded-lg bg-red-500/10 p-4 text-red-500 border border-red-500/20 text-sm flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
               </svg>
               {error}
@@ -108,15 +104,12 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full rounded-xl border border-slate-700/50 bg-slate-900/50 px-4 py-3 text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all shadow-sm placeholder-slate-500"
-                placeholder="name@example.com"
+                placeholder="Enter your email"
               />
             </div>
 
             <div>
-              <div className="flex justify-between items-center mb-1.5">
-                <label className="block text-sm font-medium text-slate-300" htmlFor="password">Password</label>
-                <a href="#" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">Forgot password?</a>
-              </div>
+              <label className="block text-sm font-medium text-slate-300 mb-1.5" htmlFor="password">Password</label>
               <input
                 id="password"
                 type="password"
@@ -131,7 +124,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3 text-white font-medium hover:from-blue-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-blue-500/25 mt-8"
+              className="w-full rounded-xl bg-linear-to-r from-blue-600 to-indigo-600 px-4 py-3 text-white font-medium hover:from-blue-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-blue-500/25 mt-5 cursor-pointer"
             >
               {loading ? (
                  <div className="flex items-center justify-center">
