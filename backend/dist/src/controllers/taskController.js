@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskController = void 0;
 const taskService_1 = __importDefault(require("../services/taskService"));
+const date_1 = require("../utils/date");
 class TaskController {
     async create(req, res) {
         try {
@@ -14,7 +15,7 @@ class TaskController {
                 return;
             }
             const task = await taskService_1.default.createTask(userId, req.body);
-            res.status(201).json(task);
+            res.status(201).json((0, date_1.formatTaskDates)(task));
         }
         catch (error) {
             res.status(400).json({ message: error.message });
@@ -23,7 +24,7 @@ class TaskController {
     async getAll(req, res) {
         try {
             const tasks = await taskService_1.default.getAllTasks();
-            res.json(tasks);
+            res.json(tasks.map(date_1.formatTaskDates));
         }
         catch (error) {
             res.status(500).json({ message: error.message });
@@ -37,7 +38,7 @@ class TaskController {
                 return;
             }
             const tasks = await taskService_1.default.getTasksByUserId(userId);
-            res.json(tasks);
+            res.json(tasks.map(date_1.formatTaskDates));
         }
         catch (error) {
             res.status(400).json({ message: error.message });
@@ -46,7 +47,7 @@ class TaskController {
     async getById(req, res) {
         try {
             const task = await taskService_1.default.getTaskById(Number(req.params.id));
-            res.json(task);
+            res.json((0, date_1.formatTaskDates)(task));
         }
         catch (error) {
             res.status(404).json({ message: error.message });
@@ -60,7 +61,7 @@ class TaskController {
                 return;
             }
             const task = await taskService_1.default.updateTask(Number(req.params.id), userId, req.body);
-            res.json(task);
+            res.json((0, date_1.formatTaskDates)(task));
         }
         catch (error) {
             res.status(400).json({ message: error.message });

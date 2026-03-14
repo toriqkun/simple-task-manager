@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const userService_1 = __importDefault(require("../services/userService"));
+const date_1 = require("../utils/date");
 class UserController {
     async register(req, res) {
         try {
@@ -113,7 +114,7 @@ class UserController {
     async getUserTasks(req, res) {
         try {
             const tasks = await userService_1.default.getTasksByUserId(Number(req.params.id));
-            res.json(tasks);
+            res.json(tasks.map(date_1.formatTaskDates));
         }
         catch (error) {
             res.status(400).json({ message: error.message });
