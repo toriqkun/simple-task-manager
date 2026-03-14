@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
-import { CheckSquare, LogOut, Settings, ChevronDown } from 'lucide-react';
+import { CheckSquare, LogOut, User, ChevronDown } from 'lucide-react';
 import ProfileModal from './ProfileModal';
 
 export default function Navbar() {
@@ -72,8 +72,8 @@ export default function Navbar() {
                         onClick={handleProfileClick}
                         className="w-full text-left px-4 py-2 text-sm text-slate-300 hover:text-white hover:bg-slate-800 flex items-center space-x-2 cursor-pointer transition-colors"
                       >
-                        <Settings size={16} className="text-slate-400" />
-                        <span>Profile Settings</span>
+                        <User size={16} className="text-slate-400" />
+                        <span>Profile</span>
                       </button>
                       
                       <button
