@@ -2,9 +2,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import type { ReactNode } from 'react';
 import { AuthProvider, useAuth } from './context/authContext';
 
+import Login from './pages/Login';
+import Register from './pages/Register';
+
 // Placeholder components for pages
-const Login = () => <div className="p-10 text-white">Login Page (Pending Step 8)</div>;
-const Register = () => <div className="p-10 text-white">Register Page (Pending Step 8)</div>;
 const Dashboard = () => <div className="p-10 text-white">Dashboard Page (Pending Step 9)</div>;
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
