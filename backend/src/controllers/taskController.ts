@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import taskService from '../services/taskService';
 import { AuthRequest } from '../middleware/authMiddleware';
+import { formatTaskDates } from '../utils/date';
 
 export class TaskController {
   async create(req: AuthRequest, res: Response): Promise<void> {
@@ -12,7 +13,7 @@ export class TaskController {
       }
 
       const task = await taskService.createTask(userId, req.body);
-      res.status(201).json(task);
+      res.status(201).json(formatTaskDates(task));
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }
@@ -21,7 +22,7 @@ export class TaskController {
   async getAll(req: Request, res: Response): Promise<void> {
     try {
       const tasks = await taskService.getAllTasks();
-      res.json(tasks);
+      res.json(tasks.map(formatTaskDates));
     } catch (error: any) {
       res.status(500).json({ message: error.message });
     }
@@ -35,7 +36,7 @@ export class TaskController {
         return;
       }
       const tasks = await taskService.getTasksByUserId(userId);
-      res.json(tasks);
+      res.json(tasks.map(formatTaskDates));
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }
@@ -44,7 +45,7 @@ export class TaskController {
   async getById(req: Request, res: Response): Promise<void> {
     try {
       const task = await taskService.getTaskById(Number(req.params.id));
-      res.json(task);
+      res.json(formatTaskDates(task));
     } catch (error: any) {
       res.status(404).json({ message: error.message });
     }
@@ -58,7 +59,7 @@ export class TaskController {
         return;
       }
       const task = await taskService.updateTask(Number(req.params.id), userId, req.body);
-      res.json(task);
+      res.json(formatTaskDates(task));
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }

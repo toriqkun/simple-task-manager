@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import userService from '../services/userService';
 import { AuthRequest } from '../middleware/authMiddleware';
+import { formatTaskDates } from '../utils/date';
 
 export class UserController {
   async register(req: Request, res: Response): Promise<void> {
@@ -117,7 +118,7 @@ export class UserController {
   async getUserTasks(req: Request, res: Response): Promise<void> {
     try {
       const tasks = await userService.getTasksByUserId(Number(req.params.id));
-      res.json(tasks);
+      res.json(tasks.map(formatTaskDates));
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }
